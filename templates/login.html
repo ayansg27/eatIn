@@ -32,6 +32,11 @@
                     {% if error %}
                         <p class=error><strong>Error:</strong> {{ error }}
                     {% endif %}
+                    {% if created %}
+                       <div class="alert alert-success" role="alert">
+                           <strong>Awesome!</strong> You successfully created an account
+                       </div>
+                    {% endif %}
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon3">Username</span>
                         <input type="text" class="form-control" name="username" id="user" aria-describedby="basic-addon3">

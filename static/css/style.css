@@ -4,3 +4,9 @@
 .loginformpadtop {
     padding-top: 3rem;
 }
+.label{
+    width: 3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

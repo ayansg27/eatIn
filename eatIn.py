@@ -52,9 +52,60 @@ def logout():
 
 @app.route('/signup', methods=['GET','POST'])
 def signup():
-    return render_template('signup.html')
+    error=None
+    if request.method=='GET':
+        return render_template('signup.html')
+    elif request.method=='POST':
+        signuptype_cust = request.form['radioCustomer']
+        signuptype_chef = request.form['radioChef']
+        if signuptype_cust:
+            cust_fname = request.form['fname']
+            cust_lname = request.form['lname']
+            cust_email = request.form['email']
+            cust_phone = request.form['phone']
+            cust_password = request.form['password']
+            cust_cpassword = request.form['cpassword']
+            cust_address = request.form['address']
+            cust_street = request.form['street']
+            cust_city = request.form['city']
+            cust_state = request.form['state']
+            cust_zipcode = request.form['zipcode']
+            cust_country = request.form['country']
+            cust_preference = request.form['preference']
+            sql_user="insert into user (emailid,password,fname,lname,user_type) values(%s,%s,%s,%s,%s)"
+            sql_customer="insert into customer (address,street,city,state,zipcode,country,phone_number,preference) values(%s,%s,%s,%s,%d,%s,%s,%s)"
+            if cust_password==cust_cpassword:
+                cur.execute(sql_user, (cust_email, cust_cpassword, cust_fname, cust_lname, "customer"))
+                cur.execute(sql_customer, (cust_address, cust_street, cust_city, cust_state, cust_zipcode, cust_country, cust_phone,cust_preference))
+                return redirect(url_for('login', created=true))
+            else:
+                error="Passwords don't match"
+                return render_template('signup.html', custerror=error)
 
-app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+        if signuptype_chef:
+            chef_cfname = request.form['cfname']
+            chef_clname = request.form['clname']
+            chef_cemail = request.form['cemail']
+            chef_cphone = request.form['cphone']
+            chef_cpassword = request.form['cpassword']
+            chef_ccpassword = request.form['ccpassword']
+            chef_caddress = request.form['caddress']
+            chef_cstreet = request.form['cstreet']
+            chef_ccity = request.form['ccity']
+            chef_cstate = request.form['cstate']
+            chef_czipcode = request.form['czipcode']
+            chef_ccountry = request.form['ccountry']
+            chef_cuisine = request.form['cuisine']
+            sql_user = "insert into user (emailid,password,fname,lname,user_type) values(%s,%s,%s,%s,%s)"
+            sql_chef = "insert into chef (address,street,city,state,zipcode,country,phone_number) values(%s,%s,%s,%s,%s,%s,%s)"
+            if chef_cpassword == chef_ccpassword:
+                cur.execute(sql_user, (chef_cemail, chef_cpassword, chef_cfname, chef_clname, "chef"))
+                cur.execute(sql_chef,(chef_caddress, chef_cstreet, chef_ccity, chef_cstate, chef_czipcode, chef_ccountry, chef_cphone))
+                return redirect(url_for('login', created=true))
+            else:
+                error = "Passwords don't match"
+                return render_template('signup.html', cheferror=error)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
