@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+
+</head>
+<body>
+    <div class="" style="">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" class="" alt="" align="center">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+                {% if session_user_name %}
+                    <p>Hello <b>{{ session_user_name }}</b></p>
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<body style="background-image: url({{ url_for('static', filename='img/loginback.jpg') }});background-size:100%100vh; background-repeat: no-repeat;overflow-x:hidden;">
+    <div class="container" style="" align="center">
+        <div class="row">
+            <div class="col-md-7"></div>
+            <div class="col-md-5 col-md-offset-5 loginformback rounded loginformpadtop" style="height:20rem; padding-top: 2rem;">
+                <h3 class="text-primary">Please sign in</h3>
+                <form action="" method="POST" style="padding-top:2rem">
+                    {% if error %}
+                        <p class=error><strong>Error:</strong> {{ error }}
+                    {% endif %}
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">Username</span>
+                        <input type="text" class="form-control" name="username" id="user" aria-describedby="basic-addon3">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">Password</span>
+                        <input type="password" class="form-control" id="pass" name="password" aria-describedby="basic-addon3">
+                    </div>
+                    <br>
+                    <input type="Submit" value="Login" class="btn btn-info">
+                </form>
+                <br>
+                Not a member? <a href="{{ url_for('signup') }}">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

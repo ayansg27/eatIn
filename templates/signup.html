@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+</head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#chef").hide();
+        $("#cust").show();
+        $("#radioChef").prop('checked', false);
+        $("#radioCust").click(function(){
+            $("#chef").hide();
+            $("#cust").show();
+            $("#radioChef").prop('checked', false);
+        });
+        $("#radioChef").click(function(){
+            $("#cust").hide();
+            $("#chef").show();
+            $("#radioCust").prop('checked', false);
+    });
+});
+</script>
+<body>
+    <div class="" style="">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" class="" alt="" align="center">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+                {% if session_user_name %}
+                    <p>Hello <b>{{ session_user_name }}</b></p>
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+<body style="background-image: url({{ url_for('static', filename='img/loginback.jpg') }});background-size:100%100vh; background-repeat: no-repeat;overflow-x:hidden;">
+    <div class="container" style="" align="center">
+        <div class="row">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon3">User Type</span>
+                <label class="radio-inline">
+                    <input type="radio" name="radioCustomer" id="radioCust" aria-describedby="basic-addon3" checked="true"> Customer
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="radioChef" id="radioChef" aria-describedby="basic-addon3"> Chef
+                </label>
+            </div>
+            <!--if customer seleted-->
+            <div class="col-md-12 col-md-offset-3" id="cust">
+                <form action="" method="POST">
+                    <div class="row">
+                        <div class="input-group col-md-6">
+                            <span class="input-group-addon" id="basic-addon3">First Name</span>
+                            <input type="text" class="form-control" name="fname" id="firsN" aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group col-md-6">
+                            <span class="input-group-addon" id="basic-addon3">Last Name</span>
+                            <input type="text" class="form-control" name="lname" id="lasN" aria-describedby="basic-addon3">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="input-group col-md-6">
+                            <span class="input-group-addon" id="basic-addon3">Email</span>
+                            <input type="text" class="form-control" name="email" id="em" aria-describedby="basic-addon3">
+                        </div>
+                        <div class="input-group col-md-6">
+                            <span class="input-group-addon" id="basic-addon3">Phone</span>
+                            <input type="text" class="form-control" name="phone" id="phn" aria-describedby="basic-addon3">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="input-group col-md-6">
+                            <span class="input-group-addon" id="basic-addon3">Password</span>
+                            <input type="password" class="form-control" name="password" id="pass" aria-describedby="basic-addon3">
+                        </div>
+                        <div class="input-group col-md-6">
+                            <span class="input-group-addon" id="basic-addon3">Confirm Password</span>
+                            <input type="password" class="form-control" name="cpassword" id="cpass" aria-describedby="basic-addon3">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="input-group col-md-6">
+                            <span class="input-group-addon" id="basic-addon3">Apartment No</span>
+                            <input type="text" class="form-control" name="address" id="address" aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group col-md-6">
+                            <span class="input-group-addon" id="basic-addon3">Street</span>
+                            <input type="text" class="form-control" name="street" id="street" aria-describedby="basic-addon3">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="input-group col-md-6">
+                            <span class="input-group-addon" id="basic-addon3">City</span>
+                            <input type="text" class="form-control" name="city" id="city" aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group col-md-6">
+                            <span class="input-group-addon" id="basic-addon3">State</span>
+                            <input type="text" class="form-control" name="state" id="state" aria-describedby="basic-addon3">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="input-group col-md-6">
+                            <span class="input-group-addon" id="basic-addon3">Zipcode</span>
+                            <input type="text" class="form-control" name="zipcode" id="zipcode" aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group col-md-6">
+                            <span class="input-group-addon" id="basic-addon3">Country</span>
+                            <input type="text" class="form-control" name="country" id="country" aria-describedby="basic-addon3">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="input-group col-md-6">
+                            <span class="input-group-addon" id="basic-addon3">Preferences</span>
+                            <input type="text" class="form-control" name="preferences" id="preferences" aria-describedby="basic-addon3">
+                        </div>
+                    </div>
+                    <br>
+                    <input type="Submit" value="Sign Up" class="btn btn-default btn-sm">
+                </form>
+            </div>
+            <!--if chef selected-->
+            <div class="col-md-6 col-md-offset-3" id="chef">
+                <form action="" method="POST">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">First Name</span>
+                        <input type="text" class="form-control" name="cfname" id="cfirsN" aria-describedby="basic-addon3">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">Last Name</span>
+                        <input type="text" class="form-control" name="clname" id="clasN" aria-describedby="basic-addon3">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">Email</span>
+                        <input type="text" class="form-control" name="cemail" id="cem" aria-describedby="basic-addon3">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">Password</span>
+                        <input type="password" class="form-control" name="cpassword" id="cpass" aria-describedby="basic-addon3">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">Confirm Password</span>
+                        <input type="password" class="form-control" name="cpassword" id="ccpass" aria-describedby="basic-addon3">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">Apartment No</span>
+                        <input type="text" class="form-control" name="caddress" id="caddress" aria-describedby="basic-addon3">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">Street</span>
+                        <input type="text" class="form-control" name="cstreet" id="cstreet" aria-describedby="basic-addon3">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">City</span>
+                        <input type="text" class="form-control" name="ccity" id="ccity" aria-describedby="basic-addon3">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">State</span>
+                        <input type="text" class="form-control" name="cstate" id="cstate" aria-describedby="basic-addon3">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">Zipcode</span>
+                        <input type="text" class="form-control" name="czipcode" id="czipcode" aria-describedby="basic-addon3">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">Country</span>
+                        <input type="text" class="form-control" name="ccountry" id="ccountry" aria-describedby="basic-addon3">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">Cuisine</span>
+                        <input type="text" class="form-control" name="cuisine" id="cuisine" aria-describedby="basic-addon3">
+                    </div>
+                    <br>
+                    <input type="Submit" value="Sign Up" class="btn btn-default btn-sm">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
